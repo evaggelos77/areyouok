@@ -220,7 +220,15 @@ const el: Dict = {
   toastFailed: 'Δεν στάλθηκε. Δοκίμασε ξανά.',
 
   errorsGeneric: 'Κάτι πήγε στραβά. Δοκίμασε ξανά.',
-  offline: 'Χωρίς σύνδεση – το περιβάλλον ανοίγει, αλλά οι αποστολές χρειάζονται σύνδεση στο διαδίκτυο.'
+  offline: 'Χωρίς σύνδεση – το περιβάλλον ανοίγει, αλλά οι αποστολές χρειάζονται σύνδεση στο διαδίκτυο.',
+
+  // Terms / acceptance
+  termsAccept1: 'Διάβασα και αποδέχομαι τους ',
+  termsLink: 'Όρους Χρήσης & Πολιτική Απορρήτου',
+  termsMustAccept: 'Αποδέξου τους Όρους για να συνεχίσεις.',
+  termsTitle: 'Όροι Χρήσης & Πολιτική Απορρήτου',
+  termsUpdated: 'Τελευταία ενημέρωση: Μάιος 2026',
+  termsBack: '← Πίσω'
 };
 
 const en: Dict = {
@@ -441,7 +449,15 @@ const en: Dict = {
   toastFailed: 'Not sent. Please try again.',
 
   errorsGeneric: 'Something went wrong. Please try again.',
-  offline: 'Offline – UI works, but sending needs a connection.'
+  offline: 'Offline – UI works, but sending needs a connection.',
+
+  // Terms / acceptance
+  termsAccept1: 'I have read and accept the ',
+  termsLink: 'Terms of Service & Privacy Policy',
+  termsMustAccept: 'Please accept the Terms to continue.',
+  termsTitle: 'Terms of Service & Privacy Policy',
+  termsUpdated: 'Last updated: May 2026',
+  termsBack: '← Back'
 };
 
 const dictByLang: Record<Lang, Dict> = { el, en };

@@ -15,12 +15,22 @@ export default function LoginPage() {
   const [busy, setBusy] = useState(false);
   const [devCode, setDevCode] = useState<string | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
+  const [accepted, setAccepted] = useState<boolean>(() => !!localStorage.getItem('ayok_terms_accepted'));
 
   const onSend = async () => {
+    if (!accepted) {
+      setError('MUST_ACCEPT_TERMS');
+      return;
+    }
     setError(null);
     setBusy(true);
     try {
       const r = await auth.requestOtp(email);
+      try {
+        localStorage.setItem('ayok_terms_accepted', new Date().toISOString());
+      } catch {
+        /* ignore */
+      }
       setDevCode(r.devCode);
       setStep('code');
     } catch (e: any) {
@@ -44,6 +54,7 @@ export default function LoginPage() {
 
 
   const errorKeyByCode: Record<string, string> = {
+    MUST_ACCEPT_TERMS: 'termsMustAccept',
     SMTP_NOT_CONFIGURED: 'otpEmailUnavailable',
     OTP_EMAIL_UNAVAILABLE: 'otpEmailUnavailable',
     OTP_TOO_MANY_REQUESTS: 'otpTooManyRequests',
@@ -88,7 +99,29 @@ export default function LoginPage() {
                   autoComplete="email"
                 />
               </div>
-              <button className="btn btn-grad" onClick={onSend} disabled={busy}>
+              <label
+                className="muted small"
+                style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 12, cursor: 'pointer' }}
+              >
+                <input
+                  type="checkbox"
+                  checked={accepted}
+                  onChange={(e) => setAccepted(e.target.checked)}
+                  style={{ marginTop: 3, flex: '0 0 auto' }}
+                />
+                <span>
+                  {t(lang, 'termsAccept1')}
+                  <a
+                    href="/terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'inherit', textDecoration: 'underline' }}
+                  >
+                    {t(lang, 'termsLink')}
+                  </a>
+                </span>
+              </label>
+              <button className="btn btn-grad" onClick={onSend} disabled={busy || !accepted}>
                 {t(lang, 'sendCode')} <ArrowRight size={18} />
               </button>
             </div>

@@ -14,6 +14,7 @@ import SosPage from './pages/SosPage';
 import CheckinPage from './pages/CheckinPage';
 import JoinCirclePage from './pages/JoinCirclePage';
 import HelpPage from './pages/HelpPage';
+import TermsPage from './pages/TermsPage';
 import VoiceAssistRunner from './components/VoiceAssistRunner';
 import TrialExpiredOverlay from './components/TrialExpiredOverlay';
 
@@ -105,6 +106,7 @@ export default function App() {
       <TrialExpiredOverlay />
       <Routes>
         <Route path="/join/:token" element={<JoinCirclePage />} />
+        <Route path="/terms" element={<TermsPage />} />
 
         {!auth.user ? (
           <>
