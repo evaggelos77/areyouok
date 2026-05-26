@@ -1,0 +1,22 @@
+# dependencies
+node_modules
+
+# build
+client/dist
+
+# env
+.env
+
+# database
+server/data/*.db
+server/data/*.db-wal
+server/data/*.db-shm
+
+# logs
+*.log
+
+# OS
+.DS_Store
+
+# IDE
+.vscode

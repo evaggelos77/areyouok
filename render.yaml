@@ -1,0 +1,52 @@
+services:
+  - type: web
+    name: areyouok
+    runtime: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    disk:
+      name: areyouok-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_PATH
+        value: /var/data/areyouok.db
+      # --- secrets / per-deploy values: set these in the Render dashboard ---
+      - key: JWT_SECRET
+        sync: false
+      - key: PUBLIC_BASE_URL
+        sync: false
+      # Email / OTP login (REQUIRED so users can sign in)
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_SECURE
+        value: "false"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+      # Stripe subscriptions (can be added after first deploy)
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: PRICE_ID_MONTHLY
+        sync: false
+      - key: PRICE_ID_YEARLY
+        sync: false
+      # Web Push (optional — add later)
+      - key: VAPID_PUBLIC_KEY
+        sync: false
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_SUBJECT
+        sync: false
