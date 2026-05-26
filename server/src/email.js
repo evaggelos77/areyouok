@@ -16,7 +16,11 @@ function createTransport() {
     auth: {
       user: config.smtpUser,
       pass: config.smtpPass
-    }
+    },
+    // Shared hosting (e.g. Papaki) serves a *.papaki.gr cert for mail.<domain>,
+    // so strict hostname verification fails (ERR_TLS_CERT_ALTNAME_INVALID).
+    // Connection stays TLS-encrypted; we just don't reject on the CN mismatch.
+    tls: { rejectUnauthorized: false }
   });
 }
 
