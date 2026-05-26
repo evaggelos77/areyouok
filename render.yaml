@@ -3,7 +3,8 @@ services:
     name: areyouok
     runtime: node
     plan: starter
-    buildCommand: npm install && npm run build
+    # --include=dev forces build-only deps (vite, etc.) even with NODE_ENV=production
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
     autoDeploy: true
